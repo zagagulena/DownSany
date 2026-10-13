@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+downloads/
+cookies.txt
+venv
+tiktok_state.json
