@@ -1,0 +1,41 @@
+# Говорим Railway (Nixpacks) доустановить ffmpeg как системный пакет —
+# pip install этого не делает, а yt-dlp без ffmpeg не может склеивать
+# видео+аудио дорожки.
+#
+# Плюс системные библиотеки, нужные headless-Chromium (Playwright) —
+# он используется для скачивания фото-постов TikTok.
+[phases.setup]
+nixPkgs = [
+    "ffmpeg",
+    "chromium",
+    "glib",
+    "nss",
+    "nspr",
+    "atk",
+    "cups",
+    "dbus",
+    "libdrm",
+    "gtk3",
+    "pango",
+    "cairo",
+    "alsa-lib",
+    "at-spi2-atk",
+    "at-spi2-core",
+    "mesa",
+    "expat",
+    "libxkbcommon",
+    "xorg.libX11",
+    "xorg.libXcomposite",
+    "xorg.libXdamage",
+    "xorg.libXext",
+    "xorg.libXfixes",
+    "xorg.libXrandr",
+    "xorg.libxcb",
+    "xorg.libXi",
+]
+
+[phases.install]
+cmds = [
+    "pip install -r requirements.txt",
+    "playwright install chromium",
+]
