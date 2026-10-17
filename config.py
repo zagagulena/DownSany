@@ -26,5 +26,9 @@ if TIKTOK_STATE_FILE and not os.path.isabs(TIKTOK_STATE_FILE):
 if TIKTOK_STATE_FILE and not os.path.exists(TIKTOK_STATE_FILE):
     TIKTOK_STATE_FILE = None
 
+# HTTP-API для приложения «Видеообои». Пустой API_TOKEN — API выключен.
+API_TOKEN = os.getenv("API_TOKEN", "").strip()
+API_PORT = int(os.getenv("PORT", os.getenv("API_PORT", "8080")))
+
 DOWNLOADS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "downloads")
 os.makedirs(DOWNLOADS_DIR, exist_ok=True)

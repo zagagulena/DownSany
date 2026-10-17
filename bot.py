@@ -17,6 +17,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
 import config
+from api_server import start_api_server
 from downloader import (
     detect_platform,
     download_video,
@@ -164,8 +165,15 @@ async def main():
     dp = Dispatcher()
     dp.include_router(router)
 
+    # HTTP-API для приложения «Видеообои» (работает, если задан API_TOKEN)
+    api_runner = await start_api_server()
+
     await bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot)
+    try:
+        await dp.start_polling(bot)
+    finally:
+        if api_runner:
+            await api_runner.cleanup()
 
 
 if __name__ == "__main__":
